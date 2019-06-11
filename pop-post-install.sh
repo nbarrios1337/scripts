@@ -22,6 +22,11 @@ dpkg -i keybase_amd64.deb
 apt-get install -f
 run_keybase
 
+#Bonsai.sh steup and install (Copied from https://gitlab.com/jallbrit/bonsai.sh/tree/master)
+git clone https://gitlab.com/jallbrit/bonsai.sh ~/bin/bonsai.sh
+chmod +x ~/bin/bonsai.sh/bonsai.sh
+ln -s ~/bin/bonsai.sh/bonsai.sh ~/.local/bin/bonsai
+
 #Update all packages after all repos have been added
 apt update
 apt full-upgrade -y
