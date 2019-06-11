@@ -52,9 +52,9 @@ sudo -u "$USER" firefox \
 #Downloads Slack
 https://slack.com/downloads/instructions/ubuntu \
 #Downloads Discord
-https://discordapp.com/api/download?platform=linux&format=deb
+"https://discordapp.com/api/download?platform=linux&format=deb" \
 #Downloads JetBrains Toolbox App
-https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux \
+"https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
 #Opens Pop!_OS Support Docs
 https://support.system76.com/ \
 #Opens GNOME Extensions Page 
