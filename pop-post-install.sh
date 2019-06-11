@@ -12,7 +12,7 @@ add-apt-repository ppa:daniruiz/flat-remix
 #Brave Browser repo setup (Copied from https://brave-browser.readthedocs.io/en/latest/installing-brave.html)
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 source /etc/os-release
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-${UBUNTU_CODENAME}.list
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-"${UBUNTU_CODENAME}".list
 
 #Keybase setup and install (Copied from https://keybase.io/docs/the_app/install_linux#ubuntu-debian-and-friends)
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
@@ -48,7 +48,7 @@ snap install spotify
 #For some reason, apt considers pop-desktop for removal. 
 apt install -y pop-desktop sessioninstaller
 
-sudo -u $USER firefox \
+sudo -u "$USER" firefox \
 #Downloads Slack
 https://slack.com/downloads/instructions/ubuntu \
 #Downloads Discord
