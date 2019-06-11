@@ -38,7 +38,7 @@ flatpak gnome-software-plugin-flatpak \
 #GNOME Tweaks
 gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
 #Add misc. packages here
-powertop neofetch vlc hub steam nvme-cli 
+powertop neofetch vlc hub steam nvme-cli shellcheck
 
 flatpak remote-add -y --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
