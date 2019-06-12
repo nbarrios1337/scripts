@@ -27,6 +27,9 @@ sudo -u "$SUDO_USER" run_keybase
 git clone https://gitlab.com/jallbrit/bonsai.sh ~/bin/bonsai.sh
 chmod +x ~/bin/bonsai.sh/bonsai.sh
 ln -s ~/bin/bonsai.sh/bonsai.sh ~/.local/bin/bonsai
+echo "alias bonsai='~/bin/bonsai.sh/bonsai.sh'" >> ~/.bashrc
+source ~/.bashrc
+
 
 #Update all packages after all repos have been added
 apt update
@@ -40,7 +43,7 @@ flatpak gnome-software-plugin-flatpak `#Flatpak` \
 gnome-tweak-tool gnome-tweaks gnome-shell-extensions `#GNOME Tweaks` \
 powertop neofetch vlc hub steam nvme-cli shellcheck `#Add misc. packages here`
 
-flatpak remote-add -y --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #For some reason, the snap package of Spotify is updated more often than the .deb package, so this is the exception
 snap install spotify
@@ -49,7 +52,7 @@ snap install spotify
 apt install -y pop-desktop sessioninstaller
 
 sudo -u "$SUDO_USER" firefox \
-https://slack.com/downloads/instructions/ubuntu `#Downloads Slack` \
+https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb `#Downloads Slack` \
 "https://discordapp.com/api/download?platform=linux&format=deb" `#Downloads Discord` \
 "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" `#Downloads JetBrains Toolbox App` \
 https://support.system76.com/ `#Opens Pop!_OS Support Docs` \
