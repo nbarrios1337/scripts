@@ -8,7 +8,7 @@ add-apt-repository restricted
 add-apt-repository multiverse
 
 #Flat-Remix repo for flat-remix-gtk, flat-remix-gnome, and flat-remix packages
-add-apt-repository ppa:daniruiz/flat-remix
+add-apt-repository -y ppa:daniruiz/flat-remix
 
 #Brave Browser repo setup (Copied from https://brave-browser.readthedocs.io/en/latest/installing-brave.html)
 curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
