@@ -21,7 +21,7 @@ curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
 # command, you can ignore it, as the subsequent command corrects it
 dpkg -i keybase_amd64.deb
 apt-get install -f
-sudo -u "$USER" run_keybase
+sudo -u "$SUDO_USER" run_keybase
 
 #Bonsai.sh steup and install (Copied from https://gitlab.com/jallbrit/bonsai.sh/tree/master)
 git clone https://gitlab.com/jallbrit/bonsai.sh ~/bin/bonsai.sh
@@ -48,7 +48,7 @@ snap install spotify
 #For some reason, apt considers pop-desktop for removal. 
 apt install -y pop-desktop sessioninstaller
 
-sudo -u "$USER" firefox \
+sudo -u "$SUDO_USER" firefox \
 https://slack.com/downloads/instructions/ubuntu `#Downloads Slack` \
 "https://discordapp.com/api/download?platform=linux&format=deb" `#Downloads Discord` \
 "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" `#Downloads JetBrains Toolbox App` \
