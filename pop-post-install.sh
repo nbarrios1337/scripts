@@ -3,27 +3,27 @@
 #Remember to 'chmod +x' this file
 
 DIRECTORY=/var/log/scripts/
-mkdir -p ${DIRECTORY}
+sudo mkdir -p ${DIRECTORY}
 {
-add-apt-repository universe 
-add-apt-repository restricted 
-add-apt-repository multiverse
+sudo add-apt-repository -y universe 
+sudo add-apt-repository -y restricted 
+sudo add-apt-repository -y multiverse
 
 #Flat-Remix repo for flat-remix-gtk, flat-remix-gnome, and flat-remix packages
-add-apt-repository -y ppa:daniruiz/flat-remix
+sudo add-apt-repository -y ppa:daniruiz/flat-remix
 
 #Brave Browser repo setup (Copied from https://brave-browser.readthedocs.io/en/latest/installing-brave.html)
-curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
 source /etc/os-release
-echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | tee /etc/apt/sources.list.d/brave-browser-release-"${UBUNTU_CODENAME}".list
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-"${UBUNTU_CODENAME}".list
 
 #Keybase setup and install (Copied from https://keybase.io/docs/the_app/install_linux#ubuntu-debian-and-friends)
 curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
 # if you see an error about missing `libappindicator1` from the next
 # command, you can ignore it, as the subsequent command corrects it
-dpkg -i keybase_amd64.deb
-apt-get install -f
-sudo -u "$SUDO_USER" run_keybase
+sudo dpkg -i keybase_amd64.deb
+sudo apt-get install -f
+run_keybase
 
 #Bonsai.sh steup and install (Copied from https://gitlab.com/jallbrit/bonsai.sh/tree/master)
 git clone https://gitlab.com/jallbrit/bonsai.sh ~/bin/bonsai.sh
@@ -34,10 +34,10 @@ source ~/.bashrc
 
 
 #Update all packages after all repos have been added
-apt update
-apt full-upgrade -y
+sudo apt update
+sudo apt full-upgrade -y
 
-apt install -y \
+sudo apt install -y \
 snapd \
 brave-keyring brave-browser \
 flat-remix-gtk flat-remix-gnome flat-remix \
@@ -51,9 +51,9 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 snap install spotify tldr
 
 #For some reason, apt considers pop-desktop for removal. 
-apt install -y pop-desktop sessioninstaller
+sudo apt install -y pop-desktop sessioninstaller
 
-sudo -u "$SUDO_USER" firefox \
+firefox \
 https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb \
 "https://discordapp.com/api/download?platform=linux&format=deb"  \
 "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
@@ -64,8 +64,8 @@ https://www.google.com/chrome/ \
 https://github.com/r-darwish/topgrade/releases/latest
 
 #Ask for permission instead of the script default '-y'
-apt autoclean
-apt autoremove
-} 2>&1 | tee ${DIRECTORY}/"$(basename "$0")".log
+sudo apt autoclean
+sudo apt autoremove
+} 2>&1 | sudo tee ${DIRECTORY}/"$(basename "$0")".log
 
 echo Remember to reboot! Log of the processes stored at: ${DIRECTORY}/"$(basename "$0")".log
