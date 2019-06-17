@@ -3,6 +3,9 @@
 #Remember to 'chmod +x' this file
 #the backtick comments are expensive, TODO find better commenting mechanism that doesn't break multiline commands with '\'
 
+DIRECTORY=/var/log/scripts/
+mkdir -p ${DIRECTORY}
+{
 add-apt-repository universe 
 add-apt-repository restricted 
 add-apt-repository multiverse
@@ -46,7 +49,7 @@ powertop neofetch vlc hub steam nvme-cli shellcheck `#Add misc. packages here`
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #For some reason, the snap package of Spotify is updated more often than the .deb package, so this is the exception
-snap install spotify
+snap install spotify tldr
 
 #For some reason, apt considers pop-desktop for removal. 
 apt install -y pop-desktop sessioninstaller
@@ -58,11 +61,12 @@ https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb `#
 https://support.system76.com/ `#Opens Pop!_OS Support Docs` \
 https://extensions.gnome.org/ `#Opens GNOME Extensions Page` \
 https://code.visualstudio.com/docs/setup/linux `#Opens VSCode Setup` \
-https://www.google.com/chrome/ `#Opens Google Chrome Download Page`
+https://www.google.com/chrome/ `#Opens Google Chrome Download Page` \
+https://github.com/r-darwish/topgrade/releases/latest
 
 #Ask for permission instead of the script default '-y'
 apt autoclean
 apt autoremove
+} 2>&1 | tee ${DIRECTORY}/"$(basename "$0")".log
 
-
-echo Remember to reboot!
+echo Remember to reboot! Log of the processes stored at: ${DIRECTORY}/"$(basename "$0")".log
