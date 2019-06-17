@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #Remember to 'chmod +x' this file
-#the backtick comments are expensive, TODO find better commenting mechanism that doesn't break multiline commands with '\'
 
 DIRECTORY=/var/log/scripts/
 mkdir -p ${DIRECTORY}
@@ -39,12 +38,12 @@ apt update
 apt full-upgrade -y
 
 apt install -y \
-snapd `#Just in Case` \
-brave-keyring brave-browser `#Brave Browser` \
-flat-remix-gtk flat-remix-gnome flat-remix `#Flat-Remix theme` \
-flatpak gnome-software-plugin-flatpak `#Flatpak` \
-gnome-tweak-tool gnome-tweaks gnome-shell-extensions `#GNOME Tweaks` \
-powertop neofetch vlc hub steam nvme-cli shellcheck `#Add misc. packages here`
+snapd \
+brave-keyring brave-browser \
+flat-remix-gtk flat-remix-gnome flat-remix \
+flatpak gnome-software-plugin-flatpak \
+gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
+powertop neofetch vlc hub steam nvme-cli shellcheck 
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
@@ -55,13 +54,13 @@ snap install spotify tldr
 apt install -y pop-desktop sessioninstaller
 
 sudo -u "$SUDO_USER" firefox \
-https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb `#Downloads Slack` \
-"https://discordapp.com/api/download?platform=linux&format=deb" `#Downloads Discord` \
-"https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" `#Downloads JetBrains Toolbox App` \
-https://support.system76.com/ `#Opens Pop!_OS Support Docs` \
-https://extensions.gnome.org/ `#Opens GNOME Extensions Page` \
-https://code.visualstudio.com/docs/setup/linux `#Opens VSCode Setup` \
-https://www.google.com/chrome/ `#Opens Google Chrome Download Page` \
+https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb \
+"https://discordapp.com/api/download?platform=linux&format=deb"  \
+"https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
+https://support.system76.com/  \
+https://extensions.gnome.org/ \
+https://code.visualstudio.com/docs/setup/linux \
+https://www.google.com/chrome/ \
 https://github.com/r-darwish/topgrade/releases/latest
 
 #Ask for permission instead of the script default '-y'
