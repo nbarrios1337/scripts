@@ -47,10 +47,10 @@ powertop neofetch vlc hub steam nvme-cli shellcheck
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-#For some reason, the snap package of Spotify is updated more often than the .deb package, so this is the exception
+#The snap package of Spotify is updated more often than the .deb package.
 snap install spotify tldr
 
-#For some reason, apt considers pop-desktop for removal. 
+#apt considers pop-desktop for removal, manually install. 
 sudo apt install -y pop-desktop sessioninstaller
 
 firefox \
