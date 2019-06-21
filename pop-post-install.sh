@@ -66,6 +66,6 @@ https://github.com/r-darwish/topgrade/releases/latest
 #Ask for permission instead of the script default '-y'
 sudo apt autoclean
 sudo apt autoremove
-} 2>&1 | sudo tee ${DIRECTORY}/"$(basename "$0")".log
+} 2>&1 | sudo tee ${DIRECTORY}"$(basename "$0")".log
 
-echo Remember to reboot! Log of the processes stored at: ${DIRECTORY}/"$(basename "$0")".log
+echo Remember to reboot! Log of the processes stored at: ${DIRECTORY}"$(basename "$0")".log
