@@ -54,14 +54,14 @@ snap install spotify tldr
 sudo apt-get install -y pop-desktop sessioninstaller
 
 firefox \
-https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb \
+"https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb" \
 "https://discordapp.com/api/download?platform=linux&format=deb"  \
 "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
-https://support.system76.com/  \
-https://extensions.gnome.org/ \
-https://code.visualstudio.com/docs/setup/linux \
-https://www.google.com/chrome/ \
-https://github.com/r-darwish/topgrade/releases/latest
+"https://support.system76.com" \
+"https://extensions.gnome.org" \
+"https://code.visualstudio.com/docs/setup/linux" \
+"https://www.google.com/chrome" \
+"https://github.com/r-darwish/topgrade/releases/latest"
 
 #Ask for permission instead of the script default '-y'
 sudo apt-get autoclean
