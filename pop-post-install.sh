@@ -34,10 +34,10 @@ source ~/.bashrc
 
 
 #Update all packages after all repos have been added
-sudo apt update
-sudo apt full-upgrade -y
+sudo apt-get update
+sudo apt-get dist-upgrade -y
 
-sudo apt install -y \
+sudo apt-get install -y \
 snapd \
 brave-keyring brave-browser \
 flat-remix-gtk flat-remix-gnome flat-remix \
@@ -51,7 +51,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 snap install spotify tldr
 
 #apt considers pop-desktop for removal, manually install. 
-sudo apt install -y pop-desktop sessioninstaller
+sudo apt-get install -y pop-desktop sessioninstaller
 
 firefox \
 https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb \
@@ -64,8 +64,8 @@ https://www.google.com/chrome/ \
 https://github.com/r-darwish/topgrade/releases/latest
 
 #Ask for permission instead of the script default '-y'
-sudo apt autoclean
-sudo apt autoremove
+sudo apt-get autoclean
+sudo apt-get autoremove
 } 2>&1 | sudo tee ${DIRECTORY}"$(basename "$0")".log
 
 echo Remember to reboot! Log of the processes stored at: ${DIRECTORY}"$(basename "$0")".log
