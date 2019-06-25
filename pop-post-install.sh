@@ -97,7 +97,7 @@ sudo mkdir -p ${DIRECTORY}
     sudo apt-get autoremove
 } 2>&1 | sudo tee ${DIRECTORY}"$(basename "$0")".log
 
-if [[ sugar_free -eq 1 ]]; then
+if [[ ! sugar_free -eq 1 ]]; then
     run_candy
 fi
 
