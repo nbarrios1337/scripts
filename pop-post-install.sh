@@ -37,9 +37,6 @@ sudo mkdir -p ${DIRECTORY}
     sudo add-apt-repository -y restricted
     sudo add-apt-repository -y multiverse
 
-    #Flat-Remix repo for flat-remix-gtk, flat-remix-gnome, and flat-remix packages
-    #sudo add-apt-repository -y ppa:daniruiz/flat-remix
-
     #Brave Browser repo setup (Copied from https://brave-browser.readthedocs.io/en/latest/installing-brave.html)
     curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
     source /etc/os-release
@@ -52,6 +49,7 @@ sudo mkdir -p ${DIRECTORY}
     sudo dpkg -i keybase_amd64.deb
     sudo apt-get install -f
     run_keybase
+    rm -f ./keybase_amd64.deb
 
     #Update all packages after all repos have been added
     sudo apt-get update
@@ -59,9 +57,8 @@ sudo mkdir -p ${DIRECTORY}
 
     sudo apt-get install -y \
         snapd pip \
-        brave-keyring brave-browser
-    # flat-remix-gtk flat-remix-gnome flat-remix \
-    flatpak gnome-software-plugin-flatpak \
+        brave-keyring brave-browser \
+        flatpak gnome-software-plugin-flatpak \
         gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
         powertop neofetch vlc hub steam nvme-cli shellcheck \
         silversearcher-ag mps-youtube
@@ -74,7 +71,7 @@ sudo mkdir -p ${DIRECTORY}
     sudo apt-get install -y pop-desktop sessioninstaller
 
     firefox \
-        "https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.2-amd64.deb" \
+        "https://slack.com/downloads/instructions/ubuntu" \
         "https://discordapp.com/api/download?platform=linux&format=deb" \
         "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
         "https://support.system76.com" \
