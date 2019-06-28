@@ -17,6 +17,12 @@ user_settings_path="$HOME"/.config/Code/User/settings.json
     #Use VSCode as the default editor for git
     git config --global core.editor "code --wait"
 
+    code --install-extension --force ms-python.python
+    code --install-extension --force vscode-icons-team.vscode-icons
+    code --install-extension --force ms-vscode.cpptools
+    code --install-extension --force timonwong.shellcheck
+    code --install-extension --force eamodio.gitlens
+
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
 echo "$0": Log of Visual Studio Code installation stored at: "${log_directory}""$(basename "$0")".log
