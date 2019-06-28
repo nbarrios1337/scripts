@@ -4,6 +4,7 @@
 
 log_directory=/var/log/scripts/
 CANDY=./candy.sh
+git_setup=./git-setup.sh
 
 sugar_free=0
 
@@ -20,15 +21,15 @@ while [ -n "$1" ]; do
     shift
 done
 
-run_candy() {
-    if [[ -e "${CANDY}" ]]; then
-        echo "${CANDY}" does not exist. >&2
+script_run() {
+    if [[ -e "$1" ]]; then
+        echo "$1" does not exist. >&2
         return
-    elif [[ -x "${CANDY}" ]]; then
-        echo "${CANDY}" is not executable. >&2
+    elif [[ -x "$1" ]]; then
+        echo "$1" is not executable. >&2
         return
     fi
-    ${CANDY}
+    $1
 }
 
 sudo mkdir -p ${log_directory}
@@ -84,7 +85,9 @@ sudo mkdir -p ${log_directory}
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
 if [[ ! sugar_free -eq 1 ]]; then
-    run_candy
+    script_run ${CANDY}
 fi
+
+script_run ${git_setup}
 
 echo "$0": Remember to reboot! Log of the script execution stored at: "${log_directory}""$(basename "$0")".log
