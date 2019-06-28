@@ -76,7 +76,6 @@ sudo mkdir -p ${DIRECTORY}
         "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
         "https://support.system76.com" \
         "https://extensions.gnome.org" \
-        "https://code.visualstudio.com/docs/setup/linux" \
         "https://www.google.com/chrome"
 
     #Ask for permission instead of the script default '-y'
