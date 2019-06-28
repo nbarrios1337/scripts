@@ -18,10 +18,13 @@ user_settings_path="$HOME"/.config/Code/User/settings.json
     git config --global core.editor "code --wait"
 
     code --install-extension --force ms-python.python
-    code --install-extension --force vscode-icons-team.vscode-icons
     code --install-extension --force ms-vscode.cpptools
-    code --install-extension --force timonwong.shellcheck
     code --install-extension --force eamodio.gitlens
+    code --install-extension --force vscjava.vscode-java-pack
+    code --install-extension --force vscode-icons-team.vscode-icons
+    code --install-extension --force DavidAnson.vscode-markdownlint
+    code --install-extension --force timonwong.shellcheck
+    
 
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
