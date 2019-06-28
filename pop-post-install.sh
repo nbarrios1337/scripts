@@ -2,7 +2,7 @@
 
 #Remember to 'chmod +x' this file
 
-DIRECTORY=/var/log/scripts/
+log_directory=/var/log/scripts/
 CANDY=./candy.sh
 
 sugar_free=0
@@ -31,7 +31,7 @@ run_candy() {
     ${CANDY}
 }
 
-sudo mkdir -p ${DIRECTORY}
+sudo mkdir -p ${log_directory}
 {
     sudo add-apt-repository -y universe
     sudo add-apt-repository -y restricted
@@ -81,10 +81,10 @@ sudo mkdir -p ${DIRECTORY}
     #Ask for permission instead of the script default '-y'
     sudo apt-get autoclean
     sudo apt-get autoremove
-} 2>&1 | sudo tee "${DIRECTORY}""$(basename "$0")".log
+} 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
 if [[ ! sugar_free -eq 1 ]]; then
     run_candy
 fi
 
-echo "$0": Remember to reboot! Log of the script execution stored at: "${DIRECTORY}""$(basename "$0")".log
+echo "$0": Remember to reboot! Log of the script execution stored at: "${log_directory}""$(basename "$0")".log

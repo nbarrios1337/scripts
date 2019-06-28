@@ -2,7 +2,7 @@
 
 #Remember to 'chmod +x' this file
 
-DIRECTORY=/var/log/scripts/
+log_directory=/var/log/scripts/
 
 {
     cp ~/.bashrc ~/.bashrc.backup
@@ -13,7 +13,7 @@ DIRECTORY=/var/log/scripts/
     echo "alias bonsai='~/bin/bonsai.sh/bonsai.sh'" >>~/.bashrc
 
     #TMatrix  setup and install (Copied from https://github.com/M4444/TMatrix/blob/master/README.md#download-and-install-on-other-gnulinux-distributions)
-    sudo apt-get install libncurses5
+    sudo apt-get install -y libncurses5
     wget -q https://github.com/M4444/TMatrix/releases/download/v1.1/installation.tar.gz
     tar -zxvf installation.tar.gz
     cd installation || (echo "TMatrix extract failed." && exit)
@@ -28,6 +28,6 @@ DIRECTORY=/var/log/scripts/
 
     #one call to reload the aliases
     source ~/.bashrc
-} 2>&1 | sudo tee "${DIRECTORY}""$(basename "$0")".log
+} 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
-echo "$0": Remember to reboot! Log of the script execution stored at: "${DIRECTORY}""$(basename "$0")".log
+echo "$0": Log of the script execution stored at: "${log_directory}""$(basename "$0")".log
