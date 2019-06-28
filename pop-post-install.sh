@@ -57,7 +57,7 @@ sudo mkdir -p ${log_directory}
     sudo apt-get dist-upgrade -y
 
     sudo apt-get install -y \
-        snapd pip \
+        snapd \
         brave-keyring brave-browser \
         flatpak gnome-software-plugin-flatpak \
         gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
