@@ -13,71 +13,29 @@ This is a repository mainly for me to easily update shell scripts for anything I
 
 ## Getting Started
 
-[`pop-post-install.sh`](pop-post-install.sh) updates all the packages in the distro, installs a select few apps, like Steam and gnome-tweaks, and the opens some links to more software that isn't listed in a repository.
+[`post-install.sh`](post-install.sh) updates all the packages in the distro, installs a select few apps, like Steam and gnome-tweaks, opens some links to more software that isn't listed in a repository and finally runs the scripts in [`scripts.txt`](scripts.txt).
 
 [`candy.sh`](candy.sh) installs miscellaneous eye-candy for the terminal (hence the script name), like tmatrix, a cmatrix-like program.
 
+[`git-setup.sh`](git-setup.sh), [`python-setup.sh`](python-setup.sh), and [`vscode-setup.sh`](vscode-setup.sh) are self-explanatory. As to why I made seperate scripts for each type of setup, it's part of my progress in making each script work as standalone files.
+
+[`.update.sh`](.update.sh) provides a convenient way to automatically update [`scripts.txt`](scripts.txt) when creating or deleting new `.sh` files. In fact, any script you add to [`scripts.txt`](scripts.txt) (Remember to include the `./` at the beginning of each name!) would be set executable and run by [`post-install.sh`](post-install.sh)
+
 ### Prerequisites
 
-[`pop-post-install.sh`](pop-post-install.sh) has been made to work with Pop!\_OS, specifically Pop!\_OS 19.04 (19.04 is the version I use and have tested [`pop-post-install.sh`](pop-post-install.sh) with). See [the Pop!\_OS website](https://system76.com/pop) for more information about the distribution.
+The scripts should be able to run on any Ubuntu derivative (i.e. has `apt` and Canonical's package repositories). I use and have tested this on Pop!\_OS 19.04.
 
 ### Installing
 
-[`pop-post-install.sh`](pop-post-install.sh) is meant to be run immediately after finishing the distro installation. It runs [`candy.sh`](candy.sh) afterwards, unless `-s` or `--sugar-free` is specified.
-
-Downloading the script (preferably in your `$HOME` directory):
-
-```bash
-wget https://raw.githubusercontent.com/nbarrios1337/scripts/master/pop-post-install.sh
-```
-
-Set the script to be executable:
-
-```bash
-chmod +x pop-post-install.sh
-```
-
-If you'd like to copy/paste the commmands all together:
-
-```bash
-wget https://raw.githubusercontent.com/nbarrios1337/scripts/master/pop-post-install.sh
-chmod +x pop-post-install.sh
-```
-
-[`candy.sh`](candy.sh) requires similar installation steps. Simply replace all instances of `pop-post-install.sh` with `candy.sh` in the above steps. Like so:
-
-```bash
-wget https://raw.githubusercontent.com/nbarrios1337/scripts/master/candy.sh
-chmod +x candy.sh
-```
-
-For a general installation steps:
-
-1. clone the repo OR pull the latest changes if already cloned.
-2. Move the scripts you'd like to use to your `$HOME` directory
-
-3. ```bash
-    chmod +x {first script} {second script} ... {nth script}
-    ```
-
-Note: chmod accepts multiple filenames as arguments; i.e. calling `chmod +x a.sh b.sh` sets both `a.sh` and `b.sh` to be exectuable. There are ways change permissions in bulk ([see this StackOverflow answer](https://stackoverflow.com/questions/6874618/changing-the-file-permissions-of-multiple-files-through-unix-terminal)), but I recommend not doing so, since it's highly likely you'd have other `.sh` files in your `$HOME` directory.
+1. Clone the repo as you would normally clone any git repository.
+2. Set the script to be executable: `chmod +x post-install.sh`
+    1. If you plan to pass in `--manual`, repeat the step above for each script in [`scripts.txt`](scripts.txt)
+3. Run `./post-install.sh`
 
 ## Usage
 
-To run a script:
+[`post-install.sh`](post-install.sh) is meant to be run immediately after finishing the distro installation. It runs the scripts listed in [`scripts.txt`](scripts.txt) by setting all but [`post-install.sh`](post-install.sh) to be exectuable.
 
-```bash
-./{script name}
-```
+You can disable the automatic executing setting by passing in `-m` or `--manual` when running [`post-install.sh`](post-install.sh). You will have to manuall set each file to be executable before running [`post-install.sh`](post-install.sh)
 
-For example, after setting [`pop-post-install.sh`](pop-post-install.sh) to be executable:
-
-```bash
-./pop-post-install.sh
-```
-
-And if you'd like to run it without having the script run [`candy.sh`](candy.sh):
-
-```bash
-./pop-post-install.sh --sugar-free
-```
+To not run [`candy.sh`](candy.sh), pass in `-s` or `--sugar-free`.

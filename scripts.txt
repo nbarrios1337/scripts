@@ -1,0 +1,5 @@
+./candy.sh
+./git-setup.sh
+./post-install.sh
+./python-setup.sh
+./vscode-setup.sh

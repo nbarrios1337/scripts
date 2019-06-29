@@ -3,15 +3,18 @@
 #Remember to 'chmod +x' this file
 
 log_directory=/var/log/scripts/
-CANDY=./candy.sh
-git_setup=./git-setup.sh
 
 sugar_free=0
+manual=0
 
 while [ -n "$1" ]; do
     case $1 in
     -s | --sugar-free)
         sugar_free=1
+        ;;
+
+    -m | --manual)
+        manual=1
         ;;
     *)
         echo Invalid argument: "$1" >&2
@@ -22,6 +25,10 @@ while [ -n "$1" ]; do
 done
 
 script_run() {
+    #Converts <script_name>.sh to ./<script_name>.sh, in order to properly execute them
+    # local script="${1/#/./}"
+    # Above command is unnecessary thanks to parsing in the main part of this script
+
     if [[ -e "$1" ]]; then
         echo "$1" does not exist. >&2
         return
@@ -29,6 +36,12 @@ script_run() {
         echo "$1" is not executable. >&2
         return
     fi
+
+    #if we're looking to run candy.sh but --sugar-free has been passed in as a command line arg
+    if [[ $1 == "./candy.sh" && $sugar_free -eq 1 ]]; then
+        return
+    fi
+
     $1
 }
 
@@ -84,10 +97,15 @@ sudo mkdir -p ${log_directory}
     sudo apt-get autoremove
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
-if [[ ! sugar_free -eq 1 ]]; then
-    script_run ${CANDY}
+#automatic setting execute bit for scripts unless --manual has been passed
+if [[ ! $manual -eq 1 ]]; then
+    #Removes the current running script from scripts.txt
+    #Sets all script files to be executable.
+    sed '/'"$(basename "$0")"'/d' <./scripts.txt | xargs chmod +x
 fi
 
-script_run ${git_setup}
+while read -r line; do
+    script_run "$line"
+done <"scripts.txt"
 
 echo "$0": Remember to reboot! Log of the script execution stored at: "${log_directory}""$(basename "$0")".log
