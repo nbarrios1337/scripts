@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#Remember to 'chmod +x' this file
-
 log_directory=/var/log/scripts/
 user_settings_path="$HOME"/.config/Code/User/settings.json
 

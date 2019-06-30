@@ -1,5 +1,5 @@
 #!/bin/bash
-#chmod +x this file
+
 function block_for_change() {
     inotifywait --event move,create,delete "$PWD"
 }
