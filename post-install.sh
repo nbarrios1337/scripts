@@ -23,10 +23,6 @@ while [ -n "$1" ]; do
 done
 
 script_run() {
-    #Converts <script_name>.sh to ./<script_name>.sh, in order to properly execute them
-    # local script="${1/#/./}"
-    # Above command is unnecessary thanks to parsing in the main part of this script
-
     if [[ -e "$1" ]]; then
         echo "$1" does not exist. >&2
         return
@@ -45,31 +41,17 @@ script_run() {
 
 sudo mkdir -p ${log_directory}
 {
+    #Just in Case (TM)
     sudo add-apt-repository -y universe
     sudo add-apt-repository -y restricted
     sudo add-apt-repository -y multiverse
-
-    #Brave Browser repo setup (Copied from https://brave-browser.readthedocs.io/en/latest/installing-brave.html)
-    curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
-    source /etc/os-release
-    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/brave-browser-release-"${UBUNTU_CODENAME}".list
-
-    #Keybase setup and install (Copied from https://keybase.io/docs/the_app/install_linux#ubuntu-debian-and-friends)
-    curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
-    # if you see an error about missing `libappindicator1` from the next
-    # command, you can ignore it, as the subsequent command corrects it
-    sudo dpkg -i keybase_amd64.deb
-    sudo apt-get install -f
-    run_keybase
-    rm -f ./keybase_amd64.deb
 
     #Update all packages after all repos have been added
     sudo apt-get update
     sudo apt-get dist-upgrade -y
 
     sudo apt-get install -y \
-        snapd \
-        brave-keyring brave-browser \
+        libxss1 libappindicator1 libappindicator7 \
         flatpak gnome-software-plugin-flatpak \
         gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
         powertop neofetch vlc hub steam nvme-cli shellcheck \
@@ -78,17 +60,38 @@ sudo mkdir -p ${log_directory}
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     snap install spotify tldr
+    #The Help article calls for sudo snap instead of just snap
+    #https://get.slack.help/hc/en-us/articles/212924728-Download-Slack-for-Linux-beta-#ubuntu-1
+    sudo snap install slack --classic
 
     #apt considers pop-desktop for removal, manually install.
     sudo apt-get install -y pop-desktop sessioninstaller
 
+    #Chrome Browser setup and install
+    wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+    sudo dpkg -i google-chrome-stable_current_amd64.deb
+    #sudo apt-get install -f
+    rm -f ./google-chrome-stable_current_amd64.deb
+
+    #Keybase setup and install (Copied from https://keybase.io/docs/the_app/install_linux#ubuntu-debian-and-friends)
+    curl -sS --remote-name "https://prerelease.keybase.io/keybase_amd64.deb"
+    # if you see an error about missing `libappindicator1` from the next
+    # command, you can ignore it, as the subsequent command corrects it
+    sudo dpkg -i keybase_amd64.deb
+    #sudo apt-get install -f
+    run_keybase
+    rm -f ./keybase_amd64.deb
+
+    #Discord setup and install
+    wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
+    sudo dpkg -i discord.deb
+    sudo apt-get install -f
+    rm -f ./discord.deb
+
     firefox \
-        "https://slack.com/downloads/instructions/ubuntu" \
-        "https://discordapp.com/api/download?platform=linux&format=deb" \
         "https://www.jetbrains.com/toolbox/download/download-thanks.html?platform=linux" \
         "https://support.system76.com" \
-        "https://extensions.gnome.org" \
-        "https://www.google.com/chrome"
+        "https://extensions.gnome.org"
 
     #Ask for permission instead of the script default '-y'
     sudo apt-get autoclean
