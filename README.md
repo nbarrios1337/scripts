@@ -1,4 +1,5 @@
 # Scripts
+[![Build Status](https://travis-ci.com/nbarrios1337/scripts.svg?branch=master)](https://travis-ci.com/nbarrios1337/scripts)
 
 ## Table of Contents
 
