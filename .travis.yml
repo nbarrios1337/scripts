@@ -1,1 +1,6 @@
 language: bash
+
+before_script:
+  - sudo apt install shellcheck
+script:
+  - for file in "/*; do bash -nv "$file"; shellcheck --exclude SC1090 "$file"; done
