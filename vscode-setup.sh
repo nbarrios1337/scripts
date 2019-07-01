@@ -12,17 +12,19 @@ user_settings_path="$HOME"/.config/Code/User/settings.json
     sudo apt-get update
     sudo apt-get install -y code
 
+    rm microsoft.gpg
+
     #Use VSCode as the default editor for git
     git config --global core.editor "code --wait"
 
-    code --install-extension --force ms-python.python
-    code --install-extension --force ms-vscode.cpptools
-    code --install-extension --force eamodio.gitlens
-    code --install-extension --force vscjava.vscode-java-pack
-    code --install-extension --force vscode-icons-team.vscode-icons
-    code --install-extension --force DavidAnson.vscode-markdownlint
-    code --install-extension --force timonwong.shellcheck
-    code --install-extension --force foxundermoon.shell-format
+    code --install-extension ms-python.python
+    code --install-extension ms-vscode.cpptools
+    code --install-extension eamodio.gitlens
+    code --install-extension vscjava.vscode-java-pack
+    code --install-extension vscode-icons-team.vscode-icons
+    code --install-extension DavidAnson.vscode-markdownlint
+    code --install-extension timonwong.shellcheck
+    code --install-extension foxundermoon.shell-format
 
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
