@@ -2,4 +2,4 @@ language: bash
 os: xenial
 
 script:
-  - for file in "/*; do bash -nv "$file"; shellcheck --exclude SC1090 "$file"; done
+  - find ./* -maxdepth 0 -name '*.sh' -exec bash -c 'echo ~~~ $0 ~~~; bash -nv $0; shellcheck $0; printf "\n";' {} \;
