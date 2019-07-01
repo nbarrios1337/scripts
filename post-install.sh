@@ -23,10 +23,10 @@ while [ -n "$1" ]; do
 done
 
 script_run() {
-    if [[ -e "$1" ]]; then
+    if [[ ! -e "$1" ]]; then
         echo "$1" does not exist. >&2
         return
-    elif [[ -x "$1" ]]; then
+    elif [[ ! -x "$1" ]]; then
         echo "$1" is not executable. >&2
         return
     fi
@@ -51,8 +51,8 @@ sudo mkdir -p ${log_directory}
     sudo apt-get dist-upgrade -y
 
     sudo apt-get install -y \
-        libxss1 libappindicator1 libappindicator7 \
-        flatpak gnome-software-plugin-flatpak \
+        libxss1 libappindicator1 \
+        snap flatpak gnome-software-plugin-flatpak \
         gnome-tweak-tool gnome-tweaks gnome-shell-extensions \
         powertop neofetch vlc hub steam nvme-cli shellcheck \
         silversearcher-ag mps-youtube
@@ -68,7 +68,7 @@ sudo mkdir -p ${log_directory}
     sudo apt-get install -y pop-desktop sessioninstaller
 
     #Chrome Browser setup and install
-    wget "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
+    wget -nv "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
     sudo dpkg -i google-chrome-stable_current_amd64.deb
     #sudo apt-get install -f
     rm -f ./google-chrome-stable_current_amd64.deb
@@ -83,7 +83,7 @@ sudo mkdir -p ${log_directory}
     rm -f ./keybase_amd64.deb
 
     #Discord setup and install
-    wget -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
+    wget -nv -O discord.deb "https://discordapp.com/api/download?platform=linux&format=deb"
     sudo dpkg -i discord.deb
     sudo apt-get install -f
     rm -f ./discord.deb
@@ -98,15 +98,16 @@ sudo mkdir -p ${log_directory}
     sudo apt-get autoremove
 } 2>&1 | sudo tee "${log_directory}""$(basename "$0")".log
 
+echo "$0": Remember to reboot! Log of the script execution stored at: "${log_directory}""$(basename "$0")".log
+
 #automatic setting execute bit for scripts unless --manual has been passed
 if [[ ! $manual -eq 1 ]]; then
     #Removes the current running script from scripts.txt
     #Sets all script files to be executable.
-    sed '/'"$(basename "$0")"'/d' <./scripts.txt | xargs chmod +x
+    sed '/'"$(basename "$0")"'/d' <scripts.txt | xargs chmod +x
 fi
 
 while read -r line; do
+    echo Now running "$line"
     script_run "$line"
 done <"scripts.txt"
-
-echo "$0": Remember to reboot! Log of the script execution stored at: "${log_directory}""$(basename "$0")".log
